@@ -52,6 +52,33 @@ def send_message(dest_num, message_content):
   print(message.sid)
   print(f"Sent message to {dest_num}")
   
+  
+import schedule
+import time
+
+def schedule_messages():
+  phones = Phone.objects.all()
+  for phone in phones:
+    user_goal = str(Goal.objects.filter(author=phone.author).last())
+    print(f'user goal: {user_goal}')
+    level = str(Level.objects.filter(author=phone.author).last())
+    print(f'user level: {level}')
+    generated_message = '👵🏻 Grandma AI says: ' + generate_message(user_goal, level)
+    print(f'generated message: {generated_message}')
+    dest_num = str(phone).replace('-', '').replace(' ', '').replace('(', '').replace(')', '')
+    print(f'sending to: {dest_num}')
+    send_message(dest_num, generated_message)
+
+    # Schedule messages based on user's preferred difficulty level
+    schedule.every(12).hours.do(schedule_messages).tag('hard')
+    schedule.every(24).hours.do(schedule_messages).tag('medium')
+    schedule.every(48).hours.do(schedule_messages).tag('easy')
+    
+    while True:
+      schedule.run_pending()
+      time.sleep
+  
+  
 @login_required(login_url='common:login')
 def phone_create(request):
   if request.method == 'POST':
