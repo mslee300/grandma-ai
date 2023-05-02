@@ -11,7 +11,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
 
-openai.api_key = "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"
+openai.api_key = ""
 
 def generate_message(request, prompt):
   replaced_prompt = prompt.replace('I want to ', '').replace('.', '')
