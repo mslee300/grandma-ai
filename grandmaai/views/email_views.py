@@ -54,6 +54,32 @@ def send_email(request, to_email, message):
       pass
     else:
         messages.error(request, f'Problem sending email to {to_email}, please check if you typed it correctly.')
+        
+        
+import schedule
+import time
+
+def schedule_messages():
+  emails = Email.objects.all()
+  for email in emails:
+    user_goal = str(Goal.objects.filter(author=email.author).last())
+    print(f'user goal: {user_goal}')
+    level = str(Level.objects.filter(author=email.author).last())
+    print(f'user level: {level}')
+    generated_message = '👵🏻 Grandma AI says: ' + generate_message(user_goal, level)
+    print(f'generated message: {generated_message}')
+    dest_num = str(email).replace('-', '').replace(' ', '').replace('(', '').replace(')', '')
+    print(f'sending to: {dest_num}')
+    send_email(dest_num, generated_message)
+
+    # Schedule messages based on user's preferred difficulty level
+    schedule.every(12).hours.do(schedule_messages).tag('hard')
+    schedule.every(24).hours.do(schedule_messages).tag('medium')
+    schedule.every(48).hours.do(schedule_messages).tag('easy')
+    
+    while True:
+      schedule.run_pending()
+      time.sleep
       
 
 @login_required(login_url='common:login')
