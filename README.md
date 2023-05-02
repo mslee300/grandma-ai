@@ -11,7 +11,7 @@ Get motivational messages from AI.
 
 ## Introduction
 
-It's frustrating trying to meet your goal sometimes. Grandma AI helps you in those situations by providing some motivational messages just for you!
+It's frustrating trying to meet your goal sometimes. Grandma AI helps you in those situations by providing excellent motivational messages just for you!
 
 <div align="center">
   <video src="https://user-images.githubusercontent.com/55467050/230217769-987d8383-6f92-4a4d-b83f-aea7046488c7.mp4" />
