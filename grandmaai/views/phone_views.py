@@ -6,7 +6,7 @@ from grandmaai.models import Goal, Phone, Level
 import openai
 from twilio.rest import Client
 
-openai.api_key = "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"
+openai.api_key = ""
 
 def generate_message(request, prompt):
   replaced_prompt = prompt.replace('I want to ', '').replace('.', '')
@@ -39,12 +39,12 @@ def generate_message(request, prompt):
 
 
 def send_message(dest_num, message_content):
-  account_sid = 'AC36f9e71f52a75a1a6db97fa846a254b6'
-  auth_token = '42f349f192e8df71300026e7371f2da9'
+  account_sid = ''
+  auth_token = ''
   client = Client(account_sid, auth_token)
   
   message = client.messages.create(
-    from_='+18442887697',
+    from_='',
     body=message_content,
     to=f'+1{dest_num}'
   )
