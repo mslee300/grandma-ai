@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="title-box">
+  <h2 class="first-title">Get motivational messages <br>from <span style="color: #FFC83D;">Grandma AI</span></h2>
+  <img class="grandma-img" src="/static/img/grandma.png" width="64px">
+</div>
+<div class="button-box">
+  <div class="start-button">
+    <a href="{% url 'grandmaai:goal_create' %}">
+      <button class="start-button1">Get started</button>
+    </a>
+  </div>
+<!--   <div class="edit-button">
+    <a href="{% url 'grandmaai:goal_create' %}">
+      <button class="edit-button1">Edit goal</button>
+    </a>
+  </div> -->
+</div>
+<div class="main-footer">
+  <a class="navbar-logo" href="{% url 'grandmaai:index' %}">	👵🏻 Grandma AI</a>
+<!--   <a href="#"><img class="insta-logo" src="/static/img/insta-logo.png"></a> -->
+</div>
+<div class="copyright">
+  <p>Copyright ©Grandma AI 2023. All rights reserved.</p>
+</div>
+{% endblock %}

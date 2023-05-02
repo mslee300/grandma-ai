@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="goal-create-container">
+  <div class="congrats-emoji">
+    <img width="80px" src="/static/img/congrats.png">
+  </div>
+  <p class="congrats-title">Congratulations!</p>
+  <p class="congrats-subtitle">Grandma AI will message you.</p>
+<div class="home-button">
+  <a href="{% url 'grandmaai:index' %}"><button type="submit" class="back-home">Home</button></a>
+</div>
+</div>
+
+{% endblock %}

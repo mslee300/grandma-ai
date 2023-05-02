@@ -1,0 +1,10 @@
+Tech Stack: 
+Django backend, Django templates front-end, SQLite database
+
+Why the Team Chose These:
+
+Django backend - The team considered Django, Node.js, and Spring. We realized the team was more proficient in Django than other backend frameworks like Node.js or Spring. Also, the fact that Django web framework is more dynamic and gives fast speed makes it more cost-effective than Node.js.
+
+Django templates front-end - The team considered React.js, Vue.js, and Django templates. The team was not familiar with React.js and Vue.js. Also, We only needed about 8 pages so making it a multi-page application seemed like a fine choice. Additionally, Django's codebase is more compact and easier to debug, and Django's templating language is faster than ReactJS's virtual DOM.
+
+SQLite database - The team considered MongoDB and SQLite. The team decided to use Django and by default, the configuration uses SQLite, so it was the easiest chocie. Also, the SQLite library is very lightweight(small footprint) and we thought it should be enough for our project's scope.

@@ -1,0 +1,5 @@
+Initial idea: use google calendar API and Nagging API to send the user notifications based on free time detected in calendar.
+
+Framework and DB: Django and MangoDB
+
+Auth with Google to access calendars through API

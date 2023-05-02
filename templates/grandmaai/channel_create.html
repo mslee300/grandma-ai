@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="goal-create-container">
+<div class="goal-title">
+  <p>Choose how you’d like to be messaged</p>
+</div>
+  <div class="channel-buttons">
+    <button onclick=email(); id="email-button" style="background-color:#FFC83D; color:#FFFFFF;" class="channel-button">E-mail 📮</button>
+    <button onclick=sms(); id="sms-button" class="channel-button">Text(SMS) 💬</button>
+  </div>
+  <img width="300px" style="margin-top:28px;" src="/static/img/progress3.svg">
+  <div class="stage-buttons">
+    <a id="next-button" href="{% url 'grandmaai:email_create' %}">
+      <button class="stage-button2">Next</button>
+    </a>
+  </div>
+</div>
+
+<script type='text/javascript'>
+function email(){
+    document.getElementById('email-button')
+    .style="background-color:#FFC83D; color: white;"
+    document.getElementById('sms-button')
+    .style="background-color:#FFFFFF; color: #828181;"
+    document.getElementById('next-button')
+    .href="{% url 'grandmaai:email_create' %}"
+    console.log("switched email")
+    
+}
+      
+function sms(){
+    document.getElementById('sms-button')
+    .style="background-color:#FFC83D; color: white;"
+    document.getElementById('email-button')
+    .style="background-color:#FFFFFF; color: #828181;"
+    document.getElementById('next-button')
+    .href="{% url 'grandmaai:phone_create' %}"
+    console.log("switched to sms")
+}
+
+</script>
+{% endblock %}

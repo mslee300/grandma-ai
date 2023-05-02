@@ -1,0 +1,5 @@
+Task,Estimated Time (Hours)
+Input text area for submitting a customizable goal (Front),1
+Word count function to limit maximum words (Front),1
+Use OpenAI's API to generate motivational messages based on user input (Backend),3
+Add the generated message string to the user attribute called 'generated_message' (Backend),1

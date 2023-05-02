@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="goal-create-container">
+<div class="goal-title">
+  <p>Write your goal</p>
+</div>
+<div class="goal-list">
+  <p><img class="done-list" src="/static/img/done.png"> &nbsp;Write what you want to achieve</p>
+  <p><img class="done-list" src="/static/img/done.png"> &nbsp;Start the sentence with "<b>I want to..</b>" </p>
+  <p><img class="done-list" src="/static/img/done.png"> &nbsp;Write between 5-50 words</p>
+</div>
+<div class="word-count">
+  <p style="margin-bottom: 5px;">Word count: 
+    <span id="show">0</span>
+  </p>
+</div>
+  
+<form method="post">
+{% csrf_token %}
+{% if form.errors %}
+<div class="alert alert-danger" role="alert">
+    {% for field in form %}
+    {% if field.errors %}
+    <div>
+        <strong>{{ field.label }}</strong>
+        {{ field.errors }}
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+<!-- 오류표시 End -->
+  <textarea name="content" id="word" oninput="countWord()" maxlength="250" placeholder="I want to get all As this semester." class="goal-input" type="text">{{ form.content.value|default_if_none:'' }}</textarea>
+  <img width="300px" style="margin-top:28px;" src="/static/img/progress.svg">
+  <div class="stage-buttons">
+    <a id="goal-next" href="{% url 'grandmaai:goal_create' %}">
+      <button type="submit" id="goal-next-button" style="color:#FFC83D; background-color:white;" class="stage-button2">Next</button>
+    </a>
+</form>
+  
+  </div>
+</div>
+
+
+<script type='text/javascript'>
+  function countWord() {
+    
+      // Get the input text value
+      var words = document
+          .getElementById("word").value;
+    
+      // Initialize the word counter
+      var count = 0;
+    
+      // Split the words on each
+      // space character 
+      var split = words.split(' ');
+    
+      // Loop through the words and 
+      // increase the counter when 
+      // each split word is not empty
+      for (var i = 0; i < split.length; i++) {
+          if (split[i] != "") {
+              count += 1;
+          }
+      }
+    
+      // Display it as output
+      document.getElementById("show")
+          .innerHTML = count;
+    
+      // Enable link and change text color
+      document.getElementById("goal-next").style.pointerEvents = "auto";
+      document.getElementById("goal-next-button").style.color = "White";
+      document.getElementById("goal-next-button").style.backgroundColor = "#FFC83D";
+  }
+
+</script>
+{% endblock %}

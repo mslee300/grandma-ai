@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="goal-create-container">
+<form method="post">
+{% csrf_token %}
+{% if form.errors %}
+<div class="alert alert-danger" role="alert">
+    {% for field in form %}
+    {% if field.errors %}
+    <div>
+        <strong>{{ field.label }}</strong>
+        {{ field.errors }}
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+<!-- 오류표시 End -->
+<div class="goal-title">
+  <p>Select level of intensity</p>
+</div>
+<div class="emoji-area">
+  <img id="emoji" width="80px" src="/static/img/smile.png">
+</div>
+<div class="intensity-buttons">
+  <div name="level" onclick=easy(); style="background-color:#FFC83D; color:#FFFFFF;" id="easy-button" class="intensity-button" value="{{ form.level.value|default_if_none:'e' }}">Easy 🍼</div>
+  <div name="level" onclick=medium(); id="medium-button" class="intensity-button" value="{{ form.level.value|default_if_none:'m' }}">Medium 🌶️</div>
+  <div name="level" onclick=hard(); id="hard-button" class="intensity-button" value="{{ form.level.value|default_if_none:'h' }}">Hard 🔥</div>
+</div>
+  <img width="300px" style="margin-top:28px;" src="/static/img/progress2.svg">
+  <div class="stage-buttons">
+    <a href="{% url 'grandmaai:level_create' %}">
+      <button id="level-submit" value="{{ form.level.value|default_if_none:'e' }}" name="level" class="stage-button2">Next</button>
+    </a>
+  </div>
+</form>
+</div>
+
+<script type='text/javascript'>
+function easy(){
+    document.getElementById('emoji')
+    .src="/static/img/smile.png";
+    document.getElementById('easy-button')
+    .style="background-color:#FFC83D; color: white;"
+    document.getElementById('medium-button')
+    .style="background-color:#FFFFFF; color: #828181;"
+    document.getElementById('hard-button')
+    .style="background-color:#FFFFFF; color: #828181;"
+    document.getElementById('level-submit')
+    .value="{{ form.level.value|default_if_none:'e' }}"
+}
+      
+function medium(){
+    document.getElementById('emoji')
+    .src="/static/img/upset.png";
+    document.getElementById('medium-button')
+    .style="background-color:#FFC83D; color: white;"
+    document.getElementById('easy-button')
+    .style="background-color:#FFFFFF; color: #828181;"
+    document.getElementById('hard-button')
+    .style="background-color:#FFFFFF; color: #828181;"
+    document.getElementById('level-submit')
+    .value="{{ form.level.value|default_if_none:'m' }}"
+}
+
+function hard(){
+    document.getElementById('emoji')
+    .src="/static/img/angry.png";
+    document.getElementById('hard-button')
+    .style="background-color:#FFC83D; color: white;"
+    document.getElementById('medium-button')
+    .style="background-color:#FFFFFF; color: #828181;"
+    document.getElementById('easy-button')
+    .style="background-color:#FFFFFF; color: #828181;"
+    document.getElementById('level-submit')
+    .value="{{ form.level.value|default_if_none:'h' }}"
+}
+</script>
+{% endblock %}

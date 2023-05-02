@@ -1,0 +1,8 @@
+"As a registered user,  I want to be able to customize goals that I want to achieve and be able to have customized messages for these goals. The input for the goal should have buttons of common goals in case I do not have specific goals in mind. For example, do homework, go to the gym, do chores, and etc. Moreover, the input should also allow me to customize my own goals more aligned with my aspirations. This will be in more of a text box format that allows me to write a sentence or two for each goal. I hope to be able to input multiple goals to cater to all aspects of my life. After I have entered these goals, I would like customized motivation messages that are related to these goals. Hopefully, there will be a handful of unique messages for each goal, in order to not have repetitive notifications. Although there are plenty of messages, each one should still have a motivational aspect to it. 
+",
+Task,Estimated Time (Hours)
+Generate motivational messages to be sent that GPT API would customize (Backend),2
+Add goal button (Frontend),1
+Allow user to define their preferred timezone to receive messages (Frontend),2
+Store pre-set user motivational goals (Database),1.5
+Display common user goals (Backend/Database),1

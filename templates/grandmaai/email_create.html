@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="goal-create-container">
+<form method="post">
+{% csrf_token %}
+{% if form.errors %}
+<div class="alert alert-danger" role="alert">
+    {% for field in form %}
+    {% if field.errors %}
+    <div>
+        <strong>{{ field.label }}</strong>
+        {{ field.errors }}
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+<!-- 오류표시 End -->
+<div class="finish-title">
+  <p>You’re all set! 👏<br>Please tell us where to send messages</p>
+</div>
+<div class="contact-boxes">
+  <input name="email" placeholder="E-mail" type="text" class="contact-box" value="{{ form.email.value|default_if_none:'' }}">
+</div>
+  <img width="300px" style="margin-top:28px;" src="/static/img/progress4.svg">
+<div class="submit-button">
+  <a id="subscribe" href="{% url 'grandmaai:email_create' %}">
+    <button type="submit" p class="subscribe-button">Submit and Subscribe</button>
+  </a>
+</div>
+</form>
+</div>
+
+<script type='text/javascript'>
+  function disableButton() {
+      // Disable link and change text color
+      document.getElementById("subscribe").style.pointerEvents = "none";
+  }
+</script>
+
+{% endblock %}

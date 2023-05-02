@@ -1,0 +1,82 @@
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404, redirect
+from grandmaai.models import Phone
+from grandmaai.forms import PhoneForm
+from grandmaai.models import Goal, Phone, Level
+import openai
+from twilio.rest import Client
+
+openai.api_key = "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"
+
+def generate_message(request, prompt):
+  replaced_prompt = prompt.replace('I want to ', '').replace('.', '')
+  print(f'replaced prompt: {replaced_prompt}')
+  if str(Level.objects.filter(author=request.user).last()) == 'h':
+      response = openai.ChatCompletion.create(
+      model="gpt-3.5-turbo",
+      temperature=1,
+      max_tokens=120,
+      top_p=1,
+      frequency_penalty=0,
+      presence_penalty=0,
+      messages=[
+            {"role": "user", "content": f"Give a nagging message for someone who wants to {replaced_prompt}"}
+        ]
+    )
+  else:
+      response = openai.ChatCompletion.create(
+      model="gpt-3.5-turbo",
+      temperature=1,
+      max_tokens=120,
+      top_p=1,
+      frequency_penalty=0,
+      presence_penalty=0,
+      messages=[
+            {"role": "user", "content": f"Give a motivational message for someone who wants to {replaced_prompt}"}
+        ]
+    )
+  return response['choices'][0]['message']['content']
+
+
+def send_message(dest_num, message_content):
+  account_sid = 'AC36f9e71f52a75a1a6db97fa846a254b6'
+  auth_token = '42f349f192e8df71300026e7371f2da9'
+  client = Client(account_sid, auth_token)
+  
+  message = client.messages.create(
+    from_='+18442887697',
+    body=message_content,
+    to=f'+1{dest_num}'
+  )
+  
+  print(message.sid)
+  print(f"Sent message to {dest_num}")
+  
+@login_required(login_url='common:login')
+def phone_create(request):
+  if request.method == 'POST':
+      form = PhoneForm(request.POST)
+      if form.is_valid():
+          phone = form.save(commit=False)
+          phone.author = request.user  # author 속성에 로그인 계정 저장
+          phone.save()
+          # generate AI message
+          user_goal = str(Goal.objects.filter(author=request.user).last())
+          print(f'user goal: {user_goal}')
+          generated_message = '👵🏻 Grandma AI says: ' + generate_message(request, user_goal)
+          print(f'generated message: {generated_message}')
+          # Send message
+          dest_num = str(Phone.objects.filter(author=request.user).last()).replace('-', '').replace(' ', '').replace('(', '').replace(')', '')
+          print(f'sending to: {dest_num}')
+          send_message(dest_num, generated_message)
+          
+          return redirect('/grandmaai/subscribed')
+  else:
+      form = PhoneForm()
+  context = {'form': form}
+  return render(request, 'grandmaai/phone_create.html', context)
+
+
+@login_required(login_url='common:login')
+def phone_modify(request, phone_id):
+  return render(request, 'grandmaai/phone_create.html')

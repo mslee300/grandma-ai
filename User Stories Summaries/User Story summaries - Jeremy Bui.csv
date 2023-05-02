@@ -1,0 +1,6 @@
+Task,Estimated Time (Hours)
+Add goal (button),0.5
+Present pre-set goals that query from the database,1
+Add the level of how often a user would want to receive a message,0.5
+Add motivational messages to be sent that GPT API would customize,2
+Have pre-set messages to be sent by the user,1
