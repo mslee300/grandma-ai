@@ -1,5 +1,5 @@
-Initial idea: use google calendar API and Nagging API to send the user notifications based on free time detected in calendar.
+Initial idea: use Twilio API and OpenAI GPT 3.5 API to send the user notifications based on free time detected in calendar.
 
-Framework and DB: Django and MangoDB
+Framework and DB: Django and SQLite
 
-Auth with Google to access calendars through API
+Auth with Google for faster logins
