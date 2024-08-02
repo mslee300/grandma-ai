@@ -1,4 +1,3 @@
-<p> DISCLAIMER: we worked on this project using replit within another repository, but the weekend before submission we ran into some technical difficulties, and had to move everything into a new repo, which is why this new one lacks commit history. Also, our original idea wanted to send out the motivational messages on a more periodic/regular basis such as every day, but these features are pay gated. However, we were able to implement a function that works locally and sends out messages every 12 hours (hard), 24 hours (medium), and 48 hours (easy) depending on the selected difficulty. The only pull back is that we did not impelement this in the production environment, only locally. Thank you! </p>
 <h1 align="center"> Grandma AI </h1> <br>
 <p align="center">
   <a href="https://grandma-ai.ithosting.repl.co/">
